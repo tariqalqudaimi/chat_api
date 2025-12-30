@@ -148,23 +148,18 @@ describe('Comprehensive Coverage Booster (+80%)', () => {
     });
 
    
-   // 5. تغطية Socket Service (بدون أخطاء 500 أو TypeError)
+   
     describe('Socket Service', () => {
         it('covers initialization, connection, and messaging events', () => {
-            // إنشاء كائن IO وهمي (Mock) يحتوي على الدوال المطلوبة
-            // mockReturnThis() مهمة جداً لأن io.to(...) تعيد نفس الكائن لاستدعاء .emit(...)
-            const mockIo = {
+        const mockIo = {
                 on: jest.fn(),
                 to: jest.fn().mockReturnThis(), 
                 emit: jest.fn()
             };
 
-            // تهيئة الخدمة بالكائن الوهمي بدلاً من السيرفر الحقيقي
+          
             socketService.init(mockIo);
 
-            // 1. اختبار منطق الاتصال (Connection Logic)
-            // بما أن init تستدعي io.on('connection', callback)، سنبحث عن هذا الـ callback ونشغله يدوياً
-            // هذا يضمن تغطية الأكواد داخل io.on('connection', ...)
             const connectionCall = mockIo.on.mock.calls.find(call => call[0] === 'connection');
             if (connectionCall) {
                 const onConnectionCallback = connectionCall[1];
@@ -176,28 +171,27 @@ describe('Comprehensive Coverage Booster (+80%)', () => {
                     on: (ev, cb) => { if (ev === 'disconnect') cb(); }
                 };
 
-                // تشغيل حدث الاتصال يدوياً
+                
                 onConnectionCallback(mockSocket);
                 
-                // التأكد من أن المستخدم انضم للغرفة الخاصة
+                
                 expect(mockSocket.join).toHaveBeenCalledWith('user_1');
             }
 
-            // 2. اختبار إرسال رسالة خاصة (sendToUser)
-            // الآن لن يظهر الخطأ io.to is not a function لأننا عرفناه في mockIo
+            
             if (socketService.sendToUser) {
                 socketService.sendToUser(1, { text: 'hi' });
                 expect(mockIo.to).toHaveBeenCalledWith('user_1');
                 expect(mockIo.emit).toHaveBeenCalledWith('new_private_message', expect.any(Object));
             }
 
-            // 3. اختبار بث التحديث (broadcastMessageUpdate)
+            
             if (socketService.broadcastMessageUpdate) {
-                // حالة شات خاص
+               
                 socketService.broadcastMessageUpdate({ receiver_id: 1, user_id: 2 });
                 expect(mockIo.to).toHaveBeenCalledWith('user_1'); // تأكدنا أنه أرسل للطرفين
                 
-                // حالة شات عام (للتغطية الشاملة)
+               
                 socketService.broadcastMessageUpdate({ content: 'general' });
                 expect(mockIo.emit).toHaveBeenCalled();
             }

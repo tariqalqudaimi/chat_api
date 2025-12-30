@@ -1,3 +1,12 @@
+/**
+ * نقطة الانطلاق الرئيسية .
+ * 
+ * 1. تهيئة سيرفر HTTP الأساسي.
+ * 2. دمج Socket.io مع السيرفر لضمان عمل البث المباشر (WebSockets) بدون أخطاء.
+ * 3. تشغيل السيرفر على البورت المحدد.
+ * 
+ */
+
 require('dotenv').config();
 const http = require('http');
 const { Server } = require('socket.io');

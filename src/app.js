@@ -1,3 +1,15 @@
+/**
+ * إعداد تطبيق Express (Application Setup).
+ * 
+ * الوظائف الأساسية:
+ * 1. إعداد الـ Middlewares الأساسية (JSON parsing, Sessions).
+ * 2. تهيئة Passport.js للمصادقة.
+ * 3. ربط ملفات التوجيه (Routes) بمساراتها الرئيسية (/auth, /api).
+ * 
+ */
+
+
+
 const express = require('express');
 const session = require('express-session');
 const passport = require('./config/passport');

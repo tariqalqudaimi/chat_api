@@ -1,3 +1,13 @@
+/**
+ * المتحكم الخاص بالرسائل (Message Controller).
+ * 
+ * يدير هذا الملف منطق العمل (Business Logic) للرسائل:
+ * - getMessages: جلب المحادثة الخاصة بين المستخدم وطرف آخر.
+ * - sendMessage: التحقق من البيانات، حفظ الرسالة، وبثها فورياً للمستقبل عبر السوكيت.
+ * - updateMessage: تعديل محتوى الرسالة وإعلام الأطراف بالتغيير.
+ * - deleteMessage: حذف الرسالة (Soft Delete).
+ */
+
 const MessageRepository = require('../repositories/message.repository');
 const socketService = require('../services/socket.service');
 

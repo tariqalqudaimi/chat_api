@@ -1,3 +1,9 @@
+
+/**
+ * هذا الـ migrations.
+ * وظيفته اضافة الجداول الى قاعدة البيانات عند تنفيذ الامر الخاص بالترحيل
+ */
+
 exports.up = function(knex) {
   return knex.schema
     .createTable('users', (table) => {

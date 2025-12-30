@@ -1,3 +1,11 @@
+/**
+ * مستودع بيانات المستخدمين.
+ * 
+ * الوظائف الرئيسية:
+ * - findOrCreate: البحث عن مستخدم بواسطة Google ID، وإنشاؤه إذا لم يكن موجوداً.
+ * - findById: البحث عن مستخدم بواسطة الـ ID الخاص به (يستخدم في Passport).
+ */
+
 const db = require('../config/db');
 
 class UserRepository {

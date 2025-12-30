@@ -1,6 +1,6 @@
 /**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> } 
+ * هذا الـ seeds.
+ * وظيفته اضافة بيانات وهمية للتجربة
  */
 
 exports.seed = async function(knex) {

@@ -1,3 +1,13 @@
+/**
+ * تعريف مسارات المصادقة (Authentication Routes).
+ * 
+ * الروابط المتاحة:
+ * - GET /google: توجيه المستخدم لصفحة دخول جوجل.
+ * - GET /google/callback: استقبال الرد من جوجل وإنشاء الجلسة والكوكي.
+ * - GET /logout: إنهاء الجلسة.
+ * - GET /current_user: إرجاع بيانات المستخدم الحالي للواجهة الأمامية.
+ */
+
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();

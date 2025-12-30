@@ -1,7 +1,14 @@
+
+/**
+ * إعداد الاتصال بقاعدة البيانات.
+ * 
+ * يقوم هذا الملف بتهيئة مكتبة Knex.js بناءً على الإعدادات الموجودة في knexfile.js.
+ * يتم استيراد هذا الملف في الـ Repositories لتنفيذ الاستعلامات.
+ */
 const knex = require('knex');
 const knexConfig = require('../../knexfile');
 
-// نقوم هنا بربط الإعدادات الموجودة في knexfile مع المحرك
+
 const db = knex(knexConfig.development);
 
 module.exports = db;
