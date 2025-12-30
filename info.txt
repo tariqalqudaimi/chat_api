@@ -1,0 +1,7 @@
+express: إطار عمل السيرفر.
+dotenv: لإدارة المتغيرات البيئية (مثل بيانات القاعدة).
+pg: تعريف قاعدة PostgreSQL.
+knex: لإدارة الـ Migrations والـ Queries.
+socket.io: للبث الفوري.
+passport & passport-google-oauth20: لنظام تسجيل الدخول بجوجل.
+jsonwebtoken: لإدارة الجلسات (JWT).
