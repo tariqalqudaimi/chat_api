@@ -7,6 +7,7 @@ exports.up = function(knex) {
       table.string('display_name').notNullable();
       table.string('avatar').nullable();
       table.timestamps(true, true);
+
     })
     .createTable('messages', (table) => {
       table.increments('id').primary();
@@ -15,6 +16,7 @@ exports.up = function(knex) {
            .references('id').inTable('users').onDelete('CASCADE');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('deleted_at').nullable();
+      table.integer('receiver_id').unsigned().references('id').inTable('users');
       
     });
 };

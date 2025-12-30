@@ -5,8 +5,8 @@
 
 exports.seed = async function(knex) {
 
-  await knex('messages').del();
-  await knex('users').del();
+  // await knex('messages').del();
+  // await knex('users').del();
 
   
   const users = await knex('users').insert([
