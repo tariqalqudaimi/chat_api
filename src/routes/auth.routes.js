@@ -10,6 +10,7 @@
 
 const express = require('express');
 const passport = require('passport');
+const signature = require('cookie-signature');
 const router = express.Router();
 
 
@@ -18,10 +19,21 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 
 router.get('/google/callback', 
     passport.authenticate('google', { failureRedirect: '/' }),
+
+    
     (req, res) => {
-       
+       const secret = process.env.JWT_SECRET || 'secret_key'; 
+
+        
+        const sessionID = req.sessionID;
+
+        
+        const signedCookie = `s:${signature.sign(sessionID, secret)}`;
+
+        
+        const finalCookieValue = encodeURIComponent(signedCookie);
         res.json({
-            message: "Login Success",
+            message: `Login Success & connect.sid=${finalCookieValue}`,
             
             
         });
