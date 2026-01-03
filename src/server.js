@@ -8,7 +8,7 @@
  */
 
 require('dotenv').config();
-const http = require('http');
+const http = require('node:http');
 const { Server } = require('socket.io');
 const app = require('./app');
 const socketService = require('./services/socket.service');
