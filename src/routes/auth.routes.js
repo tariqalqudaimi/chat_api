@@ -13,10 +13,49 @@ const passport = require('passport');
 const signature = require('cookie-signature');
 const router = express.Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Auth
+ *   description: إدارة تسجيل الدخول والخروج والمستخدمين
+ */
 
+/**
+ * @swagger
+ * /auth/google:
+ *   get:
+ *     summary: بدء تسجيل الدخول عبر Google
+ *     description: يقوم هذا الرابط بتوجيه المستخدم إلى صفحة جوجل لاختيار الحساب.
+ *     tags: [Auth]
+ *     responses:
+ *       302:
+ *         description: إعادة توجيه إلى Google OAuth
+ */
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 
+/**
+ * @swagger
+ * /auth/google/callback:
+ *   get:
+ *     summary: استقبال الرد من Google (Callback)
+ *     description: يستقبل هذا الرابط البيانات من جوجل، ينشئ الجلسة، ويعيد بيانات الكوكي لاستخدامها في Postman.
+ *     tags: [Auth]
+ *     responses:
+ *       200:
+ *         description: تم تسجيل الدخول بنجاح
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: Login Successful
+ *                 postman_helper:
+ *                   type: object
+ *                   description: بيانات مساعدة لنسخ الكوكي
+ */
 router.get('/google/callback', 
     passport.authenticate('google', { failureRedirect: '/' }),
 
@@ -47,7 +86,16 @@ router.get('/current_user', (req, res) => {
         res.status(401).json({ error: "Not authenticated" });
     }
 });
-
+/**
+ * @swagger
+ * /auth/logout:
+ *   get:
+ *     summary: تسجيل الخروج
+ *     tags: [Auth]
+ *     responses:
+ *       302:
+ *         description: تم إنهاء الجلسة وإعادة التوجيه للصفحة الرئيسية
+ */
 router.get('/logout', (req, res) => {
     req.logout(() => {
         res.redirect('/');

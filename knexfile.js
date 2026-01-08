@@ -11,6 +11,10 @@ module.exports = {
       database: process.env.DB_NAME || 'chat_db',
       port: process.env.DB_PORT || 5432,
     },
+    pool: {
+      min: 2, 
+      max: 10 
+    },
     migrations: {
       directory: path.join(__dirname, 'src/database/migrations')
     },

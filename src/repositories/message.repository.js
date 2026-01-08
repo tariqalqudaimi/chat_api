@@ -11,7 +11,7 @@ const db = require('../config/db');
 
 class MessageRepository {
     
-     async getConversation(userId, contactId, page = 1, limit = 11) {
+     async getConversation(userId, contactId, page = 1, limit = 10) {
         const offset = (page - 1) * limit;
         
         return db('messages')
